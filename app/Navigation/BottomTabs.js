@@ -107,10 +107,10 @@ const BottomTabs = () => {
 				name="Favorite"
 				component={Favorites}
 				options={{
-					headerShown: true,
-					headerTitleAlign: "center",
-					headerStyle: { borderBottomWidth: 0 },
-					headerTitleStyle: { borderBottomWidth: 0 },
+					// headerShown: true,
+					// headerTitleAlign: "center",
+					// headerStyle: { borderBottomWidth: 0 },
+					// headerTitleStyle: { borderBottomWidth: 0 },
 					headerTitle: "My favourite",
 					tabBarIcon: ({ focused }) => (
 						<View style={{ padding: 12, alignItems: "center" }}>

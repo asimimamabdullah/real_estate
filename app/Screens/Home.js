@@ -8,10 +8,12 @@ import {
 	TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Picker } from "@react-native-picker/picker";
 import { downArrow, location, mic, search } from "../../assets/icons";
 import HomeCard from "../components/HomeCard";
 const Home = ({ navigation }) => {
 	const [searchText, setSearchText] = useState("");
+	const [selectedCity, setSelectedCity] = useState("Birmingham");
 	return (
 		<SafeAreaView
 			style={{
@@ -28,13 +30,28 @@ const Home = ({ navigation }) => {
 						source={location}
 						style={{ width: 15, height: 15, tintColor: "#555555" }}
 					/>
-					<Text style={{ letterSpacing: 0.5, fontSize: 15 }}>
-						Birmingham
-					</Text>
-					<Image
+
+					<Picker
+						style={{
+							// backgroundColor: "purple",
+							padding: 10,
+							flex: 1,
+						}}
+						itemStyle={{ fontSize: 11 }}
+						mode="dialog"
+						selectedValue={selectedCity}
+						onValueChange={(val, _index) => setSelectedCity(val)}>
+						<Picker.Item label="Jakarta" value="Jakarta" />
+						<Picker.Item label="Sydney" value="Sydney" />
+						<Picker.Item label="Torronto" value="Torronto" />
+						<Picker.Item label="Moscow" value="Moscow" />
+						<Picker.Item label="Istanbul" value="Istanbul" />
+						<Picker.Item label="London" value="London" />
+					</Picker>
+					{/* <Image
 						source={downArrow}
 						style={{ width: 14, height: 14, tintColor: "#555555" }}
-					/>
+					/> */}
 				</TouchableOpacity>
 			</View>
 
@@ -97,11 +114,12 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center",
-		paddingVertical: 15,
+		paddingVertical: 10,
 		paddingHorizontal: 10,
 		borderRadius: 40,
 		gap: 8,
 		borderColor: "#dddddd",
 		borderWidth: 1,
+		minWidth: 200,
 	},
 });
