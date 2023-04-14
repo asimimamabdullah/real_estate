@@ -10,7 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { downArrow, location, mic, search } from "../../assets/icons";
 import HomeCard from "../components/HomeCard";
-const Home = () => {
+const Home = ({ navigation }) => {
 	const [searchText, setSearchText] = useState("");
 	return (
 		<SafeAreaView
@@ -82,9 +82,9 @@ const Home = () => {
 			</View>
 
 			<View style={{ gap: 10 }}>
-				<HomeCard />
-				<HomeCard />
-				<HomeCard />
+				<HomeCard navigation={navigation} />
+				<HomeCard navigation={navigation} />
+				<HomeCard navigation={navigation} />
 			</View>
 		</SafeAreaView>
 	);

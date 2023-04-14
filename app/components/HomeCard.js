@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { white_building } from "../../assets/images";
 import { heart24, heart64, heartFilled24, location } from "../../assets/icons";
 
-const HomeCard = () => {
+const HomeCard = ({ navigation }) => {
 	const [isFavorite, setIsFavorite] = useState(false);
 	return (
-		<View
+		<TouchableOpacity
+			onPress={() => navigation.navigate("Building")}
 			style={{
 				height: 185,
 				padding: 10,
@@ -114,7 +115,7 @@ const HomeCard = () => {
 					</View>
 				</View>
 			</View>
-		</View>
+		</TouchableOpacity>
 	);
 };
 

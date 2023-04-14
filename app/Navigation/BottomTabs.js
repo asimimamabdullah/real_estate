@@ -12,6 +12,9 @@ import {
 	user,
 	userFilled24,
 } from "../../assets/icons";
+import Search from "../Screens/Search";
+import Favorites from "../Screens/Favorites";
+import Profile from "../Screens/Profile";
 
 const TabsBottom = createBottomTabNavigator();
 
@@ -25,9 +28,10 @@ const BottomTabs = () => {
 					height: 85,
 					borderWidth: 0,
 					elevation: 0,
+					borderTopWidth: 0,
 					paddingHorizontal: 20,
 					bottom: 0,
-					backgroundColor: "white",
+					backgroundColor: "#fff",
 					justifyContent: "center",
 					alignItems: "center",
 					paddingHorizontal: 60,
@@ -41,10 +45,7 @@ const BottomTabs = () => {
 						<View
 							style={{
 								padding: 12,
-
-								// justifyContent: "center",
 								alignItems: "center",
-								// gap: 4,
 							}}>
 							<Image
 								source={focused ? homeFilled64 : home24}
@@ -73,7 +74,7 @@ const BottomTabs = () => {
 
 			<TabsBottom.Screen
 				name="Search"
-				component={Home}
+				component={Search}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<View style={{ padding: 12, alignItems: "center" }}>
@@ -104,8 +105,13 @@ const BottomTabs = () => {
 
 			<TabsBottom.Screen
 				name="Favorite"
-				component={Home}
+				component={Favorites}
 				options={{
+					headerShown: true,
+					headerTitleAlign: "center",
+					headerStyle: { borderBottomWidth: 0 },
+					headerTitleStyle: { borderBottomWidth: 0 },
+					headerTitle: "My favourite",
 					tabBarIcon: ({ focused }) => (
 						<View style={{ padding: 12, alignItems: "center" }}>
 							<Image
@@ -135,7 +141,7 @@ const BottomTabs = () => {
 
 			<TabsBottom.Screen
 				name="User"
-				component={Home}
+				component={Profile}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<View style={{ padding: 12, alignItems: "center" }}>

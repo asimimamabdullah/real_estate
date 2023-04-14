@@ -14,6 +14,7 @@ import heartFilled24 from "./heart-filled-24.png";
 import homeFilled64 from "./home-filled-64.png";
 import home24 from "./home-24.png";
 import userFilled24 from "./user-filled-24.png";
+import star24 from "./star-24.png";
 
 export {
 	lock,
@@ -32,4 +33,5 @@ export {
 	homeFilled64,
 	home24,
 	userFilled24,
+	star24,
 };
