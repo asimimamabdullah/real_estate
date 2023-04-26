@@ -1,10 +1,36 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
-import { email, facebook, leftArrow, search, user } from "../../assets/icons";
+import React, { useEffect } from "react";
+import {
+	avatar,
+	email,
+	facebook,
+	leftArrow,
+	search,
+	user,
+} from "../../assets/icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { random_girl } from "../../assets/images";
+import { useSelector } from "react-redux";
+import { selectCurrentToken, selectCurrentUser } from "../redux/auth/authSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Profile = ({ navigation }) => {
+	const token = useSelector(selectCurrentToken);
+	const User = useSelector(selectCurrentUser);
+
+	useEffect(() => {
+		// let Token;
+		// const get = async () => {
+		// 	const accessToken = await AsyncStorage.getItem("token");
+		// 	return { accessToken };
+		// };
+		// get().then((d) => {
+		// 	Token = d.accessToken;
+		// 	console.log("Token: ", Token, token);
+		// });
+
+		if (!token) navigation.navigate("Login");
+	}, [token]);
 	return (
 		<SafeAreaView
 			style={{
@@ -46,7 +72,7 @@ const Profile = ({ navigation }) => {
 			{/* image  */}
 			<View style={{ justifyContent: "center", alignItems: "center" }}>
 				<Image
-					source={random_girl}
+					source={avatar}
 					style={{ width: 150, height: 150, borderRadius: 90 }}
 				/>
 			</View>
@@ -63,7 +89,7 @@ const Profile = ({ navigation }) => {
 						backgroundColor: "rgb(245,244,249)",
 						borderRadius: 15,
 					}}>
-					<Text>Mathew Adam</Text>
+					<Text>{User?.name}</Text>
 					<Image source={user} style={{ width: 16, height: 16 }} />
 				</View>
 
@@ -76,7 +102,8 @@ const Profile = ({ navigation }) => {
 						backgroundColor: "rgb(245,244,249)",
 						borderRadius: 15,
 					}}>
-					<Text>+62 112-3288-9111</Text>
+					{/* <Text>+62 112-3288-9111</Text> */}
+					<Text>{User?.phone || "Phone Number"}</Text>
 					<Image source={user} style={{ width: 16, height: 16 }} />
 				</View>
 
@@ -89,7 +116,7 @@ const Profile = ({ navigation }) => {
 						backgroundColor: "rgb(245,244,249)",
 						borderRadius: 15,
 					}}>
-					<Text>Mathew@email.com</Text>
+					<Text>{User?.email}</Text>
 					<Image source={email} style={{ width: 16, height: 16 }} />
 				</View>
 
@@ -110,6 +137,7 @@ const Profile = ({ navigation }) => {
 
 			<View style={{ bottom: 0 }}>
 				<TouchableOpacity
+					onPress={() => navigation.navigate("Maps")}
 					style={{
 						backgroundColor: "rgb(139,200,63)",
 						borderRadius: 12,
@@ -122,8 +150,6 @@ const Profile = ({ navigation }) => {
 					</Text>
 				</TouchableOpacity>
 			</View>
-
-			{/* <Text>Profile</Text> */}
 		</SafeAreaView>
 	);
 };

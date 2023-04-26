@@ -8,10 +8,31 @@ import {
 	TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { email, leftArrow, lock, user } from "../../assets/icons";
+import { setCredentials } from "../redux/auth/authSlice";
+import { useRegisterMutation } from "../redux/auth/register";
 
 const Register = ({ navigation }) => {
 	const [info, setInfo] = useState({ name: "", email: "", password: "" });
+	const [errMsg, setErrMsg] = useState(null);
+	const [register, { loading }] = useRegisterMutation();
+	const dispatch = useDispatch();
+
+	const handleRegister = async () => {
+		try {
+			const userData = await register({ ...info }).unwrap();
+			await AsyncStorage.setItem("token", userData.accessToken);
+
+			dispatch(setCredentials({ ...userData }));
+			navigation.navigate("Home");
+		} catch (error) {
+			console.log("error register: ", error);
+			setErrMsg(error?.data?.message);
+		}
+	};
+
 	return (
 		<View
 			style={{ flex: 1, backgroundColor: "#ffffff", paddingHorizontal: 20 }}>
@@ -89,7 +110,9 @@ const Register = ({ navigation }) => {
 
 				{/* button */}
 				<View style={styles.submitButtonContainer}>
-					<TouchableOpacity style={styles.submitButtonView}>
+					<TouchableOpacity
+						style={styles.submitButtonView}
+						onPress={handleRegister}>
 						<Text style={styles.submitButtonText}>Register</Text>
 					</TouchableOpacity>
 				</View>

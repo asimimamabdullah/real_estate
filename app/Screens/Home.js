@@ -6,14 +6,16 @@ import {
 	Image,
 	TextInput,
 	TouchableOpacity,
+	ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Picker } from "@react-native-picker/picker";
-import { downArrow, location, mic, search } from "../../assets/icons";
+import { location, mic, search } from "../../assets/icons";
 import HomeCard from "../components/HomeCard";
+
 const Home = ({ navigation }) => {
 	const [searchText, setSearchText] = useState("");
-	const [selectedCity, setSelectedCity] = useState("Birmingham");
+	const [selectedCity, setSelectedCity] = useState("Jakarta");
 	return (
 		<SafeAreaView
 			style={{
@@ -98,11 +100,11 @@ const Home = ({ navigation }) => {
 				</View>
 			</View>
 
-			<View style={{ gap: 10 }}>
+			<ScrollView style={{ gap: 10 }}>
 				<HomeCard navigation={navigation} />
 				<HomeCard navigation={navigation} />
 				<HomeCard navigation={navigation} />
-			</View>
+			</ScrollView>
 		</SafeAreaView>
 	);
 };

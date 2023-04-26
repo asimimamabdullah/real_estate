@@ -17,10 +17,13 @@ import {
 	star24,
 } from "../../assets/icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../redux/auth/authSlice";
 
 const Building = ({ navigation }) => {
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [buyType, setBuyType] = useState("");
+	const token = useSelector(selectCurrentToken);
 	return (
 		<SafeAreaView
 			style={{
@@ -263,7 +266,8 @@ const Building = ({ navigation }) => {
 						borderRadius: 15,
 						paddingVertical: 20,
 						paddingHorizontal: 20,
-					}}>
+					}}
+					onPress={() => (token ? navigation.navigate("Booked") : null)}>
 					<Text
 						style={{
 							color: "#ffffff",

@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import {
 	StyleSheet,
@@ -8,11 +9,44 @@ import {
 	TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch } from "react-redux";
 import { email, facebook, leftArrow, lock } from "../../assets/icons";
+import { setCredentials } from "../redux/auth/authSlice";
+import { useLoginMutation } from "../redux/auth/login";
 
 const Login = ({ navigation }) => {
 	const [info, setInfo] = useState({ email: "", password: "" });
 	const [passwordShow, setPasswordShow] = useState(true);
+
+	const [login, { loading }] = useLoginMutation();
+	const dispatch = useDispatch();
+
+	const handleSubmit = async () => {
+		try {
+			const userData = await login({
+				...info,
+			}).unwrap();
+
+			await AsyncStorage.setItem("token", userData?.accessToken);
+
+			dispatch(
+				setCredentials({
+					...userData,
+				}),
+			);
+			// setInfo()
+			navigation.navigate("Home");
+		} catch (err) {
+			// if (!err?.response) setErrMsg("No Server Response");
+			// else if (err.originalStatus?.status === 400)
+			// 	setErrMsg("Missing Username or password");
+			// else if (err.originalStatus?.status === 401) setErrMsg("Unauthorized");
+			// else setErrMsg("Login Failed");
+			console.log("login erro: ", err);
+			setErrMsg(err?.data?.error);
+			// errRef.current.focus();
+		}
+	};
 	return (
 		<View
 			style={{ flex: 1, backgroundColor: "#ffffff", paddingHorizontal: 20 }}>
@@ -86,7 +120,9 @@ const Login = ({ navigation }) => {
 
 				{/* button */}
 				<View style={styles.submitButtonContainer}>
-					<TouchableOpacity style={styles.submitButtonView}>
+					<TouchableOpacity
+						style={styles.submitButtonView}
+						onPress={handleSubmit}>
 						<Text style={styles.submitButtonText}>Login</Text>
 					</TouchableOpacity>
 				</View>
@@ -128,14 +164,17 @@ const Login = ({ navigation }) => {
 					<Text style={{ fontSize: 14, color: "rgb(64,102,123)" }}>
 						Don't have an account?{" "}
 					</Text>
-					<Text
-						style={{
-							fontWeight: 600,
-							fontSize: 14,
-							color: "rgb(64,102,139)",
-						}}>
-						Register
-					</Text>
+					<TouchableOpacity
+						onPress={() => navigation.navigate("Register")}>
+						<Text
+							style={{
+								fontWeight: 600,
+								fontSize: 14,
+								color: "rgb(64,102,139)",
+							}}>
+							Register
+						</Text>
+					</TouchableOpacity>
 				</View>
 			</SafeAreaView>
 		</View>
