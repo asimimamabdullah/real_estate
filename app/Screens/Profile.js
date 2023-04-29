@@ -19,16 +19,6 @@ const Profile = ({ navigation }) => {
 	const User = useSelector(selectCurrentUser);
 
 	useEffect(() => {
-		// let Token;
-		// const get = async () => {
-		// 	const accessToken = await AsyncStorage.getItem("token");
-		// 	return { accessToken };
-		// };
-		// get().then((d) => {
-		// 	Token = d.accessToken;
-		// 	console.log("Token: ", Token, token);
-		// });
-
 		if (!token) navigation.navigate("Login");
 	}, [token]);
 	return (

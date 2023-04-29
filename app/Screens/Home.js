@@ -12,10 +12,48 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Picker } from "@react-native-picker/picker";
 import { location, mic, search } from "../../assets/icons";
 import HomeCard from "../components/HomeCard";
+import {
+	building_1,
+	building_2,
+	building_3,
+	building_4,
+} from "../../assets/images";
 
 const Home = ({ navigation }) => {
 	const [searchText, setSearchText] = useState("");
 	const [selectedCity, setSelectedCity] = useState("Jakarta");
+
+	const places = [
+		{
+			name: "Sky Dandelions Apartment",
+			place: "Jakarta, Indonesia",
+			price: "290",
+			image: building_1,
+			rating: 3.8,
+		},
+
+		{
+			name: "Ivy Cottage",
+			place: "mexico",
+			price: "320",
+			image: building_2,
+			rating: 4.3,
+		},
+		{
+			name: "The Willows",
+			place: "Jakarta, Indonesia",
+			price: "240",
+			image: building_3,
+			rating: 4.1,
+		},
+		{
+			name: "Sky Dandelions Apartment",
+			place: "California, US",
+			price: "290",
+			image: building_4,
+			rating: 4.9,
+		},
+	];
 	return (
 		<SafeAreaView
 			style={{
@@ -101,9 +139,9 @@ const Home = ({ navigation }) => {
 			</View>
 
 			<ScrollView style={{ gap: 10 }}>
-				<HomeCard navigation={navigation} />
-				<HomeCard navigation={navigation} />
-				<HomeCard navigation={navigation} />
+				{places?.map((item, index) => (
+					<HomeCard navigation={navigation} item={item} key={index} />
+				))}
 			</ScrollView>
 		</SafeAreaView>
 	);

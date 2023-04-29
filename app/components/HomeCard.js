@@ -1,9 +1,9 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { white_building } from "../../assets/images";
-import { heart24, heart64, heartFilled24, location } from "../../assets/icons";
+import { heart24, heartFilled24, location } from "../../assets/icons";
 
-const HomeCard = ({ navigation }) => {
+const HomeCard = ({ navigation, item }) => {
 	const [isFavorite, setIsFavorite] = useState(false);
 	return (
 		<TouchableOpacity
@@ -71,7 +71,7 @@ const HomeCard = ({ navigation }) => {
 									lineHeight: 24,
 									color: "rgb(33,40,89)",
 								}}>
-								Sky Dandelions Apartment
+								{item?.name}
 							</Text>
 							<View>
 								<Image />
@@ -81,7 +81,7 @@ const HomeCard = ({ navigation }) => {
 										fontSize: 14,
 										color: "rgb(33,40,89)",
 									}}>
-									4.9
+									{item?.rating}
 								</Text>
 							</View>
 							<View
@@ -95,7 +95,7 @@ const HomeCard = ({ navigation }) => {
 									style={{ width: 12, height: 12 }}
 								/>
 								<Text style={{ color: "rgb(33,40,89)" }}>
-									Jakarta, Indonesia
+									{item?.place}
 								</Text>
 							</View>
 						</View>
@@ -108,7 +108,7 @@ const HomeCard = ({ navigation }) => {
 									fontWeight: 700,
 									color: "rgb(33,40,89)",
 								}}>
-								$ 290
+								$ {item?.price}
 							</Text>
 							/month
 						</Text>
