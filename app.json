@@ -2,9 +2,10 @@
 	"expo": {
 		"name": "real_estate",
 		"slug": "real_estate",
-		"version": "1.0.3",
+		"version": "1.0.5",
 		"orientation": "portrait",
 		"icon": "./assets/icon.png",
+		"plugins": [["expo-location"]],
 		"userInterfaceStyle": "light",
 		"splash": {
 			"image": "./assets/splash.png",
@@ -20,8 +21,18 @@
 				"foregroundImage": "./assets/adaptive-icon.png",
 				"backgroundColor": "#ffffff"
 			},
-			"package": "com.anonymus.real_estate",
-			"versionCode": 2
+			"permissions": [
+				"ACCESS_COARSE_LOCATION",
+				"ACCESS_BACKGROUND_LOCATION",
+				"ACCESS_FINE_LOCATION"
+			],
+			"config": {
+				"googleMaps": {
+					"apiKey": "AIzaSyBRk77TAjQhlthyiIPx2xDH86cyCsZbkkg"
+				}
+			},
+			"package": "com.app.real_estate",
+			"versionCode": 4
 		},
 		"web": {
 			"favicon": "./assets/favicon.png"
