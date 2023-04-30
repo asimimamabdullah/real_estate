@@ -138,7 +138,7 @@ const Home = ({ navigation }) => {
 				</View>
 			</View>
 
-			<ScrollView style={{ gap: 10 }}>
+			<ScrollView contentContainerStyle={{ gap: 10 }}>
 				{places?.map((item, index) => (
 					<HomeCard navigation={navigation} item={item} key={index} />
 				))}

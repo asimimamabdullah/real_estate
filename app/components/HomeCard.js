@@ -46,7 +46,7 @@ const HomeCard = ({ navigation, item }) => {
 						/>
 					</TouchableOpacity>
 					<Image
-						source={white_building}
+						source={item?.image}
 						style={{ height: 160, width: 130, borderRadius: 20 }}
 						resizeMode="center"
 					/>
